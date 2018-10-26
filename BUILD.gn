@@ -301,6 +301,20 @@ static_library("electron_lib") {
     defines += [ "NODE_SHARED_MODE" ]
   }
 
+  if (is_win) {
+    sources += [
+      "//chrome/browser/win/chrome_process_finder.cc",
+      "//chrome/browser/win/chrome_process_finder.h",
+    ]
+  }
+
+  if (is_linux) {
+    sources += [
+      "//chrome/browser/ui/views/frame/global_menu_bar_registrar_x11.cc",
+      "//chrome/browser/ui/views/frame/global_menu_bar_registrar_x11.h",
+    ]
+  }
+
   if (enable_fake_location_provider) {
     sources += [
       "atom/browser/fake_location_provider.cc",
@@ -360,7 +374,10 @@ static_library("electron_lib") {
       "GLIB_DISABLE_DEPRECATION_WARNINGS",
     ]
 
-    sources += filenames.lib_sources_nss
+    sources += [
+      "//chrome/browser/certificate_manager_model.cc",
+      "//chrome/browser/certificate_manager_model.h",
+    ]
   }
   if (is_win) {
     libs += [ "dwmapi.lib" ]
